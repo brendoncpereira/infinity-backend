@@ -35,8 +35,8 @@ exports.findById = async (request, response) => {
 
 exports.create = async (request, response) => {
     try {
-        const { nome, username, email, cpf, senha, dt_nascimento, descricao, curriculo } = request.body
-        const docentes = await docenteService.create(nome, username, email, cpf, senha, dt_nascimento, descricao, curriculo)
+        const { nome, email, cpf, senha, dt_nascimento, descricao, curriculo } = request.body
+        const docentes = await docenteService.create(nome,  email, cpf, senha, dt_nascimento, descricao, curriculo)
         response.status(201).send({
             message: "Usuário cadastrado com sucesso!",
             body: {

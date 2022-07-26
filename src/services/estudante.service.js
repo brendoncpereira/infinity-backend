@@ -28,7 +28,7 @@ exports.create = async(nome, sobrenome, email, senha,) => {
         const estudantes = await Estudante.create({nome: nome, sobrenome: sobrenome, email: email, senha: senha})
         return estudantes
     } catch (e) {
-        throw Error('Erro ao inserir o usuário: ' + username + ' ERROR: ' + e.message)
+        throw Error('Erro ao inserir o usuário: ' + email + ' ERROR: ' + e.message)
     }
 }
 
@@ -38,7 +38,7 @@ exports.update = async (id, nome, sobrenome, email, senha) => {
             {nome: nome, sobrenome: sobrenome, email: email, senha: senha},
             {where:{id: id}})
     } catch (e) {
-        throw Error('Erro ao alterar o usuário: ' + username + ' ERROR: ' + e.message)
+        throw Error('Erro ao alterar o usuário: ' + email + ' ERROR: ' + e.message)
     }
 }
 

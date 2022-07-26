@@ -55,10 +55,12 @@ exports.update = async(request, response) => {
     try{
         const id = parseInt(request.params.id)
         const {nome, sobrenome, email, senha } = request.body
-    
-        await estudanteService.update(id, nome, sobrenome, email, senha )    
+        
+        await estudanteService.update(id, nome, sobrenome, email, senha ) 
+        
         response.status(200).send({
             message: "Usuário alterado com sucesso!", 
+
             body:{
                 nome: nome,
                 sobrenome: sobrenome,
@@ -91,6 +93,7 @@ exports.estudanteslogin = async (request, response) => {
     try {
         const { email, senha } = request.body
         const estudantes = await estudanteService.estudanteslogin(email, senha)
+        
         return response.status(201).send({
             message: 'Pesquisa realizada com sucesso!',
             body:{
