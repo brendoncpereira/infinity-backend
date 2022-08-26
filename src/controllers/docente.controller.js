@@ -1,5 +1,5 @@
 const docenteService = require('../services/docente.service')
-
+ 
 exports.findAll = async (request, response) => {
     try {
         const docentes = await docenteService.findAll()
@@ -15,7 +15,7 @@ exports.findAll = async (request, response) => {
         })
     }
 }
-
+ 
 exports.findById = async (request, response) => {
     try {
         const id = parseInt(request.params.id)
@@ -32,11 +32,11 @@ exports.findById = async (request, response) => {
         })
     }
 }
-
+ 
 exports.create = async (request, response) => {
     try {
-        const { nome, email, cpf, senha, dt_nascimento, descricao, curriculo } = request.body
-        const docentes = await docenteService.create(nome,  email, cpf, senha, dt_nascimento, descricao, curriculo)
+        const { nome, email,  senha, dt_nascimento, descricao, curriculo } = request.body
+        const docentes = await docenteService.create(nome,  email,  senha, dt_nascimento, descricao, curriculo)
         response.status(201).send({
             message: "Usuário cadastrado com sucesso!",
             body: {
@@ -50,20 +50,18 @@ exports.create = async (request, response) => {
         })
     }
 }
-
+ 
 exports.update = async(request, response) => {
     try{
         const id = parseInt(request.params.id)
-        const {nome, username, email, cpf, senha, dt_nascimento, descricao, curriculo } = request.body
-    
-        await docenteService.update(id, nome, username, email, cpf, senha, dt_nascimento, descricao, curriculo )    
+        const {nome, email,  senha, dt_nascimento, descricao, curriculo } = request.body
+   
+        await docenteService.update(id, nome, email,  senha, dt_nascimento, descricao, curriculo )    
         response.status(200).send({
-            message: "Usuário alterado com sucesso!", 
+            message: "Usuário alterado com sucesso!",
             body:{
                 nome: nome,
-                username: username,
                 email: email,
-                cpf: cpf,
                 senha: senha,
                 dt_nascimento: dt_nascimento,
                 descricao: descricao,
@@ -77,7 +75,7 @@ exports.update = async(request, response) => {
         })
     }
 }
-
+ 
 exports.delete = async(request, response) => {
     try{
         const id = parseInt(request.params.id)
@@ -90,7 +88,7 @@ exports.delete = async(request, response) => {
         })
     }
 }
-
+ 
 exports.docenteslogin = async (request, response) => {
     try {
         const { email, senha } = request.body
@@ -108,3 +106,4 @@ exports.docenteslogin = async (request, response) => {
         })
     }
 }
+ 

@@ -6,7 +6,7 @@ exports.findAll = async (request, response) => {
         return response.status(200).json({
             status: 200,
             data: aula,
-            message: 'Usuários listados com sucesso'
+            message: 'Aulas listadas com sucesso'
         })
     } catch (e) {
         response.send(400).json({
@@ -35,8 +35,8 @@ exports.findById = async (request, response) => {
 
 exports.create = async (request, response) => {
     try {
-        const { data, materia, docenteId, estudanteId} = request.body
-        const aula = await aulaService.create(data, materia, docenteId, estudanteId)
+        const { dataaula, materia, hora, docenteId, estudanteId} = request.body
+        const aula = await aulaService.create(dataaula, materia,hora,  docenteId, estudanteId)
         response.status(201).send({
             message: "Aula cadastrada com sucesso!",
             body: {
@@ -54,14 +54,15 @@ exports.create = async (request, response) => {
 exports.update = async(request, response) => {
     try{
         const id = parseInt(request.params.id)
-        const {data, materia, docenteId, estudanteId} = request.body
+        const {dataaula, materia, hora,  docenteId, estudanteId} = request.body
     
-        await aulaService.update(id, data, materia, docenteId , estudanteId)    
+        await aulaService.update(id, dataaula, hora,  materia, docenteId , estudanteId)    
         response.status(200).send({
             message: "Aula alterada com sucesso!", 
             body:{
-                data:data, 
+                dataaula:dataaula, 
                 materia: materia,
+                hora:hora,
                 docenteId: docenteId,
                 estudanteId: estudanteId
             }

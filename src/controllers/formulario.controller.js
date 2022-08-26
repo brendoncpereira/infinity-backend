@@ -1,12 +1,12 @@
-const estudanteService = require('../services/estudante.service')
+const formularioService = require('../services/formulario.service')
 
 exports.findAll = async (request, response) => {
     try {
-        const estudantes = await estudanteService.findAll()
+        const formularios = await formularioService.findAll()
         return response.status(200).json({
             status: 200,
-            data: estudantes,
-            message: 'Estudantes listados com sucesso'
+            data: formularios,
+            message: 'Pesquisas listados com sucesso'
         })
     } catch (e) {
         response.send(400).json({
@@ -19,11 +19,11 @@ exports.findAll = async (request, response) => {
 exports.findById = async (request, response) => {
     try {
         const id = parseInt(request.params.id)
-        const estudantes = await estudanteService.findById(id)
+        const formularios = await formularioService.findById(id)
         return response.status(200).json({
             status: 200,
-            data: estudantes,
-            message: 'Usuário selecionado com sucesso!'
+            data: formularios,
+            message: 'Pesquisa selecionado com sucesso!'
         })
     } catch (e) {
         response.send(400).json({
@@ -36,11 +36,11 @@ exports.findById = async (request, response) => {
 exports.create = async (request, response) => {
     try {
         const { nome, sobrenome, email, senha } = request.body
-        const estudantes = await estudanteService.create(nome, sobrenome, email, senha)
+        const formularios = await formularioService.create(nome, sobrenome, email, senha)
         response.status(201).send({
-            message: "Usuário cadastrado com sucesso!",
+            message: "Formulario cadastrado com sucesso!",
             body: {
-                user: estudantes
+                user: formularios
             }
         })
     } catch (e) {
@@ -56,10 +56,10 @@ exports.update = async(request, response) => {
         const id = parseInt(request.params.id)
         const {nome, sobrenome, email, senha } = request.body
         
-        await estudanteService.update(id, nome, sobrenome, email, senha ) 
+        await formularioService.update(id, nome, sobrenome, email, senha ) 
         
         response.status(200).send({
-            message: "Usuário alterado com sucesso!", 
+            message: "Formulário alterado com sucesso!", 
 
             body:{
                 nome: nome,
@@ -79,8 +79,8 @@ exports.update = async(request, response) => {
 exports.delete = async(request, response) => {
     try{
         const id = parseInt(request.params.id)
-        await estudanteService.delete(id)
-        response.status(200).send({message: "Usuário deletado"})
+        await formularioService.delete(id)
+        response.status(200).send({message: "Formulário deletado"})
     } catch(e){
         return response.status(400).json({
             status: 400,
@@ -89,21 +89,3 @@ exports.delete = async(request, response) => {
     }
 }
 
-exports.estudanteslogin = async (request, response) => {
-    try {
-        const { email, senha } = request.body
-        const estudantes = await estudanteService.estudanteslogin(email, senha)
-        
-        return response.status(201).send({
-            message: 'Pesquisa realizada com sucesso!',
-            body:{
-                estudantes: estudantes
-            }
-        })
-    } catch (e) {
-        return response.status(400).json({
-            status: 400,
-            message: "[CONTROLLER] Erro ao realizar pesquisa. ERROR: " + e
-        })
-    }
-}

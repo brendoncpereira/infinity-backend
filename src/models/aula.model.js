@@ -5,14 +5,19 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        data: {
-            type: Sequelize.DATE,
+        dataaula: {
+            type: Sequelize.STRING(100),
+            notNull: true
+        },
+        hora: {
+            type: Sequelize.STRING(100),
             notNull: true
         },
         materia: {
             type: Sequelize.STRING(100),
             notNull: true
         },
+
     },
     
 

@@ -24,10 +24,18 @@ db.docente = require('./docentes.model')(db.sequelize, db.Sequelize)
 db.docente.sync()
 db.aula = require('./aula.model.js')(db.sequelize, db.Sequelize)
 db.aula.sync()
+db.formulario = require('./formulario.model')(db.sequelize, db.Sequelize)
+db.formulario.sync()
 
 db.docente.hasMany(db.aula, { as: "aulas"})
 db.estudantes.hasMany(db.aula, { as: "aulas"})
 db.aula.belongsTo(db.estudantes && db.docente ,{
+    foreignKey: "docenteId",
+    as: "docentes",
+    foreignKey:"estudanteId",
+    as: 'estudantes'
+})
+db.formulario.belongsTo(db.estudantes && db.docente ,{
     foreignKey: "docenteId",
     as: "docentes",
     foreignKey:"estudanteId",
@@ -38,9 +46,9 @@ db.aula.belongsTo(db.estudantes && db.docente ,{
 const run = async() =>{
 }
 
-db.sequelize.sync({force: true}).then(() => {
+db.sequelize.sync({force: false}).then(() => {
     console.log("Updating");
     run()
 })
 
-module.exports = db
+module.exports = db             
